@@ -1,0 +1,22 @@
+services:
+  firewall:
+    build: .
+    container_name: virtual-firewall
+    ports:
+      - "8000:8000"
+    environment:
+      - PYTHONPATH=/app/src
+    volumes:
+      - ./config:/app/config:ro
+
+  internal-web-1:
+    image: nginx:1.27-alpine
+    container_name: internal-web-1
+    expose:
+      - "80"
+
+  internal-web-2:
+    image: nginx:1.27-alpine
+    container_name: internal-web-2
+    expose:
+      - "80"
